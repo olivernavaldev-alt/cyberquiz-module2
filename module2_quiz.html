@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: Organizational Data Interactive Quiz (50 Items)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+
+    <!-- Header -->
+    <header class="bg-indigo-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl font-bold tracking-wide flex items-center gap-2">
+                    <i class="fa-solid fa-database text-indigo-400"></i> Module 2: Organizational Data Quiz
+                </h1>
+                <p class="text-xs text-indigo-200 mt-0.5">50-Item Comprehensive Exam Reviewer (MC, T/F, & Enumeration)</p>
+            </div>
+            <div class="text-right">
+                <span id="score-display" class="bg-indigo-800 text-indigo-200 text-sm font-semibold px-3.5 py-1.5 rounded-full border border-indigo-700">
+                    Score: <span id="current-score" class="text-white">0</span> / 50
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-4xl w-full mx-auto p-4 sm:p-6">
+
+        <!-- Progress Header -->
+        <div class="mb-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex justify-between items-center mb-2 text-sm font-medium text-slate-600">
+                <span id="section-label" class="font-bold text-indigo-700">Section 1: Multiple Choice</span>
+                <span id="progress-text" class="text-slate-500">Item 1 of 50</span>
+            </div>
+            <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 2%"></div>
+            </div>
+        </div>
+
+        <!-- Quiz Card -->
+        <div id="quiz-container" class="glass-panel bg-white rounded-2xl shadow-md border border-slate-200 p-6 sm:p-8 transition-all">
+            <!-- Dynamic Content Injected via JS -->
+        </div>
+
+        <!-- Completion Modal -->
+        <div id="summary-container" class="hidden bg-white rounded-2xl shadow-md border border-slate-200 p-8 text-center">
+            <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Module 2 Exam Review Completed!</h2>
+            <p class="text-slate-600 mb-6">Great job reviewing all 50 items on Organizational Data & Risk Management.</p>
+
+            <div class="inline-block bg-slate-50 border border-slate-200 rounded-xl p-6 mb-8 text-center min-w-[260px]">
+                <div class="text-sm font-medium text-slate-500 uppercase tracking-wider mb-1">Final Score</div>
+                <div class="text-4xl font-extrabold text-indigo-600"><span id="final-score">0</span> / 50</div>
+                <div id="score-percentage" class="text-sm font-semibold text-slate-600 mt-1">0% Accuracy</div>
+            </div>
+
+            <div class="flex justify-center gap-4">
+                <button onclick="restartQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2.5 rounded-xl transition shadow">
+                    <i class="fa-solid fa-rotate-right me-2"></i>Retake 50-Item Quiz
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+        College of Computer and Information Sciences | Polytechnic University of the Philippines
+    </footer>
+
+    <!-- Quiz Script -->
+    <script>
+        const quizData = [
+            // ================= PART 1: MULTIPLE CHOICE (1-25) =================
+            {
+                id: 1,
+                type: 'mc',
+                question: "What is the primary definition of 'Organizational Data' according to Module 2?",
+                options: [
+                    "Data exclusively stored on physical paper documents inside government archives.",
+                    "Information that an organization generates, collects, stores, and uses to support its operations and decision-making.",
+                    "Publicly available social media posts published by private individuals.",
+                    "Unstructured data collected solely by personal smartwatches."
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Organizational data exists in digital and physical formats across various systems, not just paper archives.",
+                    "Correct! Slide 2 defines organizational data as the valuable information generated, collected, stored, and used to support an institution's operations and decisions.",
+                    "Incorrect. Private social media posts do not define organizational enterprise data.",
+                    "Incorrect. Wearable data is personal smart device data unless managed under organizational health research."
+                ]
+            },
+            {
+                id: 2,
+                type: 'mc',
+                question: "Which type of traditional data includes details relating to buying, selling, production activities, and employment decisions?",
+                options: [
+                    "Intellectual Property",
+                    "Transactional Data",
+                    "Financial Statements",
+                    "Big Data Analytics"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Intellectual property covers creations of the mind like patents and copyrights.",
+                    "Correct! Slide 7 specifies that traditional transactional data includes operational details regarding buying, selling, production, and hiring decisions.",
+                    "Incorrect. Financial statements summarize monetary transactions (income, balance sheets, cash flows).",
+                    "Incorrect. Big data analytics deals with massive datasets from cloud and IoT sources."
+                ]
+            },
+            {
+                id: 3,
+                type: 'mc',
+                question: "Literary creations, artistic works, scientific inventions, and trade secrets are classified under which category of organizational data?",
+                options: [
+                    "Financial Data",
+                    "Transactional Data",
+                    "Intellectual Property",
+                    "Operational Data Logs"
+                ],
+                correct: 2,
+                rationales: [
+                    "Incorrect. Financial data details monetary health and accounting balances.",
+                    "Incorrect. Transactional data records daily operational business exchanges.",
+                    "Correct! Slide 8 highlights that patents, trademarks, copyrights, and trade secrets created by the human mind form Intellectual Property.",
+                    "Incorrect. Operational logs record system events and supply chain traffic."
+                ]
+            },
+            {
+                id: 4,
+                type: 'mc',
+                question: "Which accounting statement provides direct insight into a company's historical revenue, expenses, and net earnings?",
+                options: [
+                    "Balance Sheet",
+                    "Income Statement",
+                    "Cash Flow Statement",
+                    "Risk Register"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. A balance sheet presents assets, liabilities, and shareholder equity at a specific point in time.",
+                    "Correct! As shown in the Financial Statements diagram (Slide 9), the Income Statement tracks Revenue, Expenses, Taxes, and Net Earnings.",
+                    "Incorrect. A cash flow statement tracks operating cash inflows and working capital changes.",
+                    "Incorrect. A risk register is a cybersecurity risk management document, not a financial statement."
+                ]
+            },
+            {
+                id: 5,
+                type: 'mc',
+                question: "What model framework was created by John McCumber in 1991 to help organizations establish and evaluate information security initiatives?",
+                options: [
+                    "The CIA Triad",
+                    "The McCumber Cube",
+                    "The Risk Identification Matrix",
+                    "The IoT Security Pentagon"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. The CIA Triad is only one dimension inside the broader 3D model.",
+                    "Correct! Slide 14 notes that John McCumber created the McCumber Cube in 1991 as a 3D security framework.",
+                    "Incorrect. The Risk Matrix is a tool used in general risk assessment.",
+                    "Incorrect. 'IoT Security Pentagon' is not a recognized framework in this module."
+                ]
+            },
+            {
+                id: 6,
+                type: 'mc',
+                question: "Which three foundational principles form Dimension 1 of the McCumber Cube?",
+                options: [
+                    "Processing, Storage, Transmission",
+                    "Awareness, Technology, Policy",
+                    "Confidentiality, Integrity, Availability",
+                    "People, Processes, Technology"
+                ],
+                correct: 2,
+                rationales: [
+                    "Incorrect. Processing, Storage, and Transmission represent the States of Information (Dimension 2).",
+                    "Incorrect. Awareness, Technology, and Policy represent Security Measures (Dimension 3).",
+                    "Correct! Slide 14 & 16 state that Dimension 1 consists of the CIA Triad: Confidentiality, Integrity, and Availability.",
+                    "Incorrect. People, Processes, and Technology form the pillars of Risk Identification."
+                ]
+            },
+            {
+                id: 7,
+                type: 'mc',
+                question: "Which cryptographic mechanism is explicitly highlighted in Slide 16 as a tool used to ensure data INTEGRITY?",
+                options: [
+                    "Data Encryption",
+                    "Hash Function / Checksum",
+                    "Two-Factor Authentication",
+                    "Identity Proofing"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Encryption ensures Confidentiality by masking readable plain text.",
+                    "Correct! Slide 16 explains that hash functions or checksums ensure Integrity by detecting unauthorized modification or tampering.",
+                    "Incorrect. 2FA protects access, ensuring Confidentiality.",
+                    "Incorrect. Identity proofing verifies user credentials for Confidentiality."
+                ]
+            },
+            {
+                id: 8,
+                type: 'mc',
+                question: "Data that is currently stored in RAM memory, on a solid-state drive (SSD), or USB drive is in which state according to the McCumber Cube?",
+                options: [
+                    "Processing (Data in Process)",
+                    "Storage (Data at Rest)",
+                    "Transmission (Data in Transit)",
+                    "Archiving (Data in Flux)"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Processing refers to active execution or database updating.",
+                    "Correct! Slide 17 defines Storage (Data at Rest) as data stored in memory or on permanent drives like HDDs, SSDs, or USBs.",
+                    "Incorrect. Transmission refers to data traveling between networks.",
+                    "Incorrect. 'Data in Flux' is not one of the McCumber Cube states."
+                ]
+            },
+            {
+                id: 9,
+                type: 'mc',
+                question: "When data travels across a network between two information systems, which state is it in?",
+                options: [
+                    "Storage",
+                    "Processing",
+                    "Transmission",
+                    "Retention"
+                ],
+                correct: 2,
+                rationales: [
+                    "Incorrect. Storage represents data stored at rest on physical media.",
+                    "Incorrect. Processing occurs when CPU/RAM operates on active data.",
+                    "Correct! Slide 17 defines Transmission (Data in Transit) as data actively traveling between information systems.",
+                    "Incorrect. Retention is an administrative data policy duration term."
+                ]
+            },
+            {
+                id: 10,
+                type: 'mc',
+                question: "Under Dimension 3 of the McCumber Cube (Security Measures), where do Firewalls and hardware/software monitoring tools belong?",
+                options: [
+                    "Awareness, Training and Education",
+                    "Technology",
+                    "Policy and Procedure",
+                    "Human Operations"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Awareness/Training covers human operational education.",
+                    "Correct! Slide 18 places software- and hardware-based solutions (like firewalls) under Technology.",
+                    "Incorrect. Policy and Procedure covers administrative controls like incident response plans.",
+                    "Incorrect. 'Human Operations' is not a formal dimension label in the McCumber Cube."
+                ]
+            },
+            {
+                id: 11,
+                type: 'mc',
+                question: "Administrative controls such as Incident Response Plans and best practice guidelines belong to which security measure in the McCumber Cube?",
+                options: [
+                    "Technology",
+                    "Awareness, Training and Education",
+                    "Policy and Procedure",
+                    "Data Transmission"
+                ],
+                correct: 2,
+                rationales: [
+                    "Incorrect. Technology refers to technical hardware/software solutions.",
+                    "Incorrect. Awareness covers user security training.",
+                    "Correct! Slide 18 defines Policy and Procedure as administrative controls providing organizational guidelines.",
+                    "Incorrect. Data Transmission is an information state, not a security measure."
+                ]
+            },
+            {
+                id: 12,
+                type: 'mc',
+                question: "What technical misconfiguration caused the August 2020 Razer security incident exposing ~100,000 customer records?",
+                options: [
+                    "An unpatched Windows operating system zero-day flaw.",
+                    "A misconfigured cloud cluster exposed to the public Internet.",
+                    "A phishing email opened by a customer support agent.",
+                    "A ransomware attack on local office hard drives."
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Operating system zero-days were not cited in the Razer breach.",
+                    "Correct! Slide 19 states a security consultant discovered a misconfigured cloud cluster that exposed customer data publicly for over 3 weeks.",
+                    "Incorrect. Phishing was a potential follow-up risk, not the root cause.",
+                    "Incorrect. The incident was a cloud cluster leak, not local drive ransomware."
+                ]
+            },
+            {
+                id: 13,
+                type: 'mc',
+                question: "In 2017, how did the Persirai IoT botnet evade detection after infecting over 122,000 IP cameras?",
+                options: [
+                    "It encrypted all video feeds using RSA-4096.",
+                    "It executed and deleted itself from storage so it ran purely in RAM memory.",
+                    "It spoofed legitimate government IP addresses.",
+                    "It disabled all network routers across the country."
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Encryption was not used to hide the botnet malware.",
+                    "Correct! Slide 20 notes that once downloaded, Persirai deleted its file and ran purely in memory to bypass detection.",
+                    "Incorrect. IP address spoofing was not the primary memory-evasion mechanism.",
+                    "Incorrect. Routers were used for transit, not disabled nationally."
+                ]
+            },
+            {
+                id: 14,
+                type: 'mc',
+                question: "What type of attack was carried out using the 122,000+ hijacked IP cameras in the Persirai botnet campaign?",
+                options: [
+                    "Distributed Denial-of-Service (DDoS) Attack",
+                    "SQL Injection Attack",
+                    "Man-in-the-Middle (MitM) Attack",
+                    "Cross-Site Scripting (XSS) Attack"
+                ],
+                correct: 0,
+                rationales: [
+                    "Correct! Slide 20 explains that the infected cameras were marshaled to flood targeted systems in Distributed Denial-of-Service (DDoS) attacks.",
+                    "Incorrect. SQL Injection targets database input forms.",
+                    "Incorrect. MitM attacks intercept communication traffic.",
+                    "Incorrect. XSS attacks inject malicious scripts into web pages."
+                ]
+            },
+            {
+                id: 15,
+                type: 'mc',
+                question: "What critical mistake did Equifax make following their massive September 2017 data breach announcement?",
+                options: [
+                    "They refused to notify law enforcement or affected customers.",
+                    "Instead of using an equifax.com subdomain, they set up a separate new domain name, enabling phishing lookalike sites to emerge.",
+                    "They shut down all credit reporting operations permanently.",
+                    "They forced customers to pay a fee to verify breached records."
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Equifax did publicly announce the breach and built a response portal.",
+                    "Correct! Slide 21 highlights that setting up a completely new standalone domain name allowed scammers to create confusing lookalike domains that tricked victims.",
+                    "Incorrect. Equifax remained in business as a major credit bureau.",
+                    "Incorrect. Verification was offered free, but the domain confusion created phishing risks."
+                ]
+            },
+            {
+                id: 16,
+                type: 'mc',
+                question: "According to the Risk Identification guide (Slide 23), what foundational principle drives risk awareness?",
+                options: [
+                    "\"Technology solves all vulnerabilities.\"",
+                    "\"You cannot manage what you cannot see.\"",
+                    "\"Cloud storage eliminates hardware failure.\"",
+                    "\"Encryption guarantees 100% security.\""
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Technology alone cannot eliminate human or process risk.",
+                    "Correct! Slide 23 explicitly highlights the core motto: 'You cannot manage what you cannot see.'",
+                    "Incorrect. Cloud storage introduces new cloud configuration risks.",
+                    "Incorrect. Absolute 100% security is impossible in practice."
+                ]
+            },
+            {
+                id: 17,
+                type: 'mc',
+                question: "In risk management, when organizing a Risk Register, which element should always be kept at the TOP of prioritization?",
+                options: [
+                    "Financial Capital",
+                    "Physical Servers",
+                    "People",
+                    "Intellectual Property Patents"
+                ],
+                correct: 2,
+                rationales: [
+                    "Incorrect. Financial capital is important but secondary to human safety.",
+                    "Incorrect. Hardware servers are replaceable technology assets.",
+                    "Correct! The Risk Identification diagram (Slide 23) emphasizes: 'Prioritise: Keep people at the top.'",
+                    "Incorrect. Patents are informational assets, prioritizing lower than human safety."
+                ]
+            },
+            {
+                id: 18,
+                type: 'mc',
+                question: "Which term describes a subtle cyber incident where hackers post untrue info or make minor edits to an organization's contact address/phone number?",
+                options: [
+                    "Ransomware Encryption",
+                    "Reputational Vandalism",
+                    "Credential Stuffing",
+                    "DDoS Flooding"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Ransomware encrypts files and demands ransom.",
+                    "Correct! Slide 26 defines Reputational Vandalism as modifying website information (or making subtle edits) to project unprofessionalism and damage credibility.",
+                    "Incorrect. Credential stuffing involves automated login attempts using stolen passwords.",
+                    "Incorrect. DDoS flooding knocks systems offline using traffic volume."
+                ]
+            },
+            {
+                id: 19,
+                type: 'mc',
+                question: "Which authentication type relies on hardware devices like a YubiKey to verify a user's identity?",
+                options: [
+                    "Certificate-Based Authentication",
+                    "Security Keys Authentication",
+                    "Biometric Authentication",
+                    "Token-Based Authentication"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Certificate-Based authentication uses software digital certificates.",
+                    "Correct! Slide 24 identifies physical keys (e.g., YubiKey) under Security Keys Authentication.",
+                    "Incorrect. Biometric authentication uses body traits like fingerprints or face scans.",
+                    "Incorrect. Token-based authentication typically generates software or time-based numeric codes."
+                ]
+            },
+            {
+                id: 20,
+                type: 'mc',
+                question: "What type of authentication allows sign-in WITHOUT entering passwords by utilizing secure methods like biometrics or magic links?",
+                options: [
+                    "Passwordless Authentication",
+                    "PIN Authentication",
+                    "OTP Authentication",
+                    "Credential Authentication"
+                ],
+                correct: 0,
+                rationales: [
+                    "Correct! Slide 24 defines Passwordless Authentication as sign-in mechanisms utilizing magic email links or biometrics instead of static passwords.",
+                    "Incorrect. PIN authentication requires entering a numeric pin code.",
+                    "Incorrect. OTP authentication requires typing a numerical one-time password.",
+                    "Incorrect. Credential authentication generally implies traditional password inputs."
+                ]
+            },
+            {
+                id: 21,
+                type: 'mc',
+                question: "Which column in a standard Risk Register answers the question: 'Where are we exposed?'",
+                options: [
+                    "Asset",
+                    "Threat",
+                    "Vulnerability",
+                    "Potential Impact"
+                ],
+                correct: 2,
+                rationales: [
+                    "Incorrect. 'Asset' answers: What are we protecting?",
+                    "Incorrect. 'Threat' answers: What could happen?",
+                    "Correct! Slide 23 shows that 'Vulnerability' represents exposure points (e.g., inadequate access controls or process gaps).",
+                    "Incorrect. 'Potential Impact' answers: What happens if the risk occurs?"
+                ]
+            },
+            {
+                id: 22,
+                type: 'mc',
+                question: "What exponential data phenomenon has emerged directly due to cloud computing, virtualization, and the Internet of Things (IoT)?",
+                options: [
+                    "Analog Archives",
+                    "Big Data",
+                    "Mainframe Redundancy",
+                    "Data Atrophy"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Analog archives deal with paper records.",
+                    "Correct! Slide 11 notes that IoT, cloud, and expanded storage options have driven exponential data growth known as 'Big Data.'",
+                    "Incorrect. Mainframe redundancy refers to hardware backup servers.",
+                    "Incorrect. Data atrophy refers to declining data quality over time."
+                ]
+            },
+            {
+                id: 23,
+                type: 'mc',
+                question: "Which threat to Intellectual Property involves encrypting organizational files and demanding payment to restore access?",
+                options: [
+                    "Brute Force Attack",
+                    "Phishing",
+                    "Ransomware",
+                    "Remote Desktop Protocol Attack"
+                ],
+                correct: 2,
+                rationales: [
+                    "Incorrect. Brute force attempts to guess passwords through trial and error.",
+                    "Incorrect. Phishing tricks users into revealing credentials.",
+                    "Correct! Slide 28 lists Ransomware as a key threat to IP, where data is locked until a ransom is paid.",
+                    "Incorrect. RDP attacks exploit remote desktop entry points."
+                ]
+            },
+            {
+                id: 24,
+                type: 'mc',
+                question: "Which financial table inside an organization records total Assets, Liabilities, and Shareholder Equity?",
+                options: [
+                    "Income Statement",
+                    "Cash Flow Statement",
+                    "Balance Sheet",
+                    "Audit Log"
+                ],
+                correct: 2,
+                rationales: [
+                    "Incorrect. Income statements display revenue and expenses.",
+                    "Incorrect. Cash flow statements record cash operational movements.",
+                    "Correct! Slide 9 displays the Balance Sheet containing Total Assets, Total Liabilities, and Shareholder Equity.",
+                    "Incorrect. Audit logs record IT system access events."
+                ]
+            },
+            {
+                id: 25,
+                type: 'mc',
+                question: "According to Slide 28, despite all safeguards put in place, what reality must cybersecurity professionals accept?",
+                options: [
+                    "Cybercriminals can be 100% prevented from attacking.",
+                    "Protecting organizations from every cyberattack is not feasible, so rapid incident response is vital.",
+                    "Firewalls eliminate all internal employee threats.",
+                    "Encryption renders cloud misconfigurations impossible."
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Total prevention is impossible against modern threats.",
+                    "Correct! Slide 28 notes that preventing every attack is unfeasible; eventually attackers succeed, making fast response and impact minimization essential.",
+                    "Incorrect. Firewalls protect perimeter networks, not insider user mistakes.",
+                    "Incorrect. Encryption does not prevent cloud access permissions misconfigurations."
+                ]
+            },
+
+            // ================= PART 2: TRUE OR FALSE (26-35) =================
+            {
+                id: 26,
+                type: 'mc',
+                question: "TRUE or FALSE: Trade secrets, patents, and new product plans are classified as Financial Data.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Trade secrets and patents are Intellectual Property, not financial records.",
+                    "Correct! Slide 8 explicitly classifies patents, trade secrets, and product plans under Intellectual Property, whereas financial data consists of accounting statements."
+                ]
+            },
+            {
+                id: 27,
+                type: 'mc',
+                question: "TRUE or FALSE: In the McCumber Cube, 'Data at Rest' refers to information actively traveling across network cables.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Data traveling across network cables is 'Data in Transit' (Transmission).",
+                    "Correct! Slide 17 defines Data at Rest as Storage (data saved on hard drives, SSDs, or memory)."
+                ]
+            },
+            {
+                id: 28,
+                type: 'mc',
+                question: "TRUE or FALSE: Perform hardware repairs, update operating systems, and perform regular backups are actions used to ensure AVAILABILITY.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 0,
+                rationales: [
+                    "Correct! Slide 16 explicitly highlights that maintaining equipment, performing repairs, updating software, and creating backups ensure Availability.",
+                    "Incorrect. These actions directly uphold system availability for authorized users."
+                ]
+            },
+            {
+                id: 29,
+                type: 'mc',
+                question: "TRUE or FALSE: In the 2020 Razer cloud incident, cybercriminals had public access to customer data for over three weeks before the server was secured.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 0,
+                rationales: [
+                    "Correct! Slide 19 states it took Razer more than three weeks to secure the cloud instance from public access after discovery.",
+                    "Incorrect. The exposure window lasted over 21 days."
+                ]
+            },
+            {
+                id: 30,
+                type: 'mc',
+                question: "TRUE or FALSE: A Distributed Denial-of-Service (DDoS) attack occurs when a single computer overwhelms multiple IoT devices.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. A DDoS attack works in reverse: multiple infected botnet devices flood a single target system.",
+                    "Correct! Slide 20 defines a DDoS attack as occurring when MULTIPLE malware-infected devices flood the resources of a targeted server."
+                ]
+            },
+            {
+                id: 31,
+                type: 'mc',
+                question: "TRUE or FALSE: Biometric authentication uses numeric dynamic PIN codes sent via SMS.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Dynamic SMS codes are OTP (One-Time Password) authentication.",
+                    "Correct! Slide 24 shows that Biometric authentication relies on unique biological traits such as fingerprints or facial recognition."
+                ]
+            },
+            {
+                id: 32,
+                type: 'mc',
+                question: "TRUE or FALSE: The McCumber Cube dimension for Security Measures consists of Awareness/Training, Technology, and Policy/Procedure.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 0,
+                rationales: [
+                    "Correct! Slide 18 lists Awareness/Training/Education, Technology, and Policy/Procedure as the 3 security measures.",
+                    "Incorrect. These three form the third dimension of the McCumber Cube."
+                ]
+            },
+            {
+                id: 33,
+                type: 'mc',
+                question: "TRUE or FALSE: Reputational damage from a cybersecurity breach is typically repaired within 24 hours.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Rebuilding lost customer trust and corporate reputation takes significant time.",
+                    "Correct! Slide 25 notes that depending on breach severity, repairing an organization's reputation can take a long time."
+                ]
+            },
+            {
+                id: 34,
+                type: 'mc',
+                question: "TRUE or FALSE: Certificate-Based Authentication utilizes digital certificates to verify the identity of users or devices.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 0,
+                rationales: [
+                    "Correct! Slide 24 explicitly states that Certificate-Based authentication uses digital certificates for verification.",
+                    "Incorrect. Digital certificates validate identities without relying solely on static passwords."
+                ]
+            },
+            {
+                id: 35,
+                type: 'mc',
+                question: "TRUE or FALSE: The Internet of Things (IoT) consists solely of desktop computers connected via wired Ethernet cables.",
+                options: [
+                    "True",
+                    "False"
+                ],
+                correct: 1,
+                rationales: [
+                    "Incorrect. Desktop computers are conventional computing endpoints, not IoT devices.",
+                    "Correct! Slides 11 & 12 state IoT includes a vast network of physical objects (sensors, smart appliances, wearables, security cameras, smart meters) sharing network data."
+                ]
+            },
+
+            // ================= PART 3: ENUMERATION & SHORT ANSWER (36-50) =================
+            {
+                id: 36,
+                type: 'enum',
+                question: "Enumerate ONE of the 3 States of Information in the McCumber Cube. (Type any ONE state)",
+                keywords: ["processing", "storage", "transmission", "data in process", "data at rest", "data in transit"],
+                correctAnswer: "Processing (Data in Process), Storage (Data at Rest), OR Transmission (Data in Transit)",
+                explanation: "Dimension 2 of the McCumber Cube defines information in three states: Processing (active), Storage (at rest), and Transmission (in transit)."
+            },
+            {
+                id: 37,
+                type: 'enum',
+                question: "Enumerate ONE of the 3 Security Measures in the McCumber Cube. (Type any ONE measure)",
+                keywords: ["awareness", "training", "education", "technology", "policy", "procedure", "policy and procedure"],
+                correctAnswer: "Awareness/Training/Education, Technology, OR Policy and Procedure",
+                explanation: "Dimension 3 of the McCumber Cube covers operational human training, technical hardware/software solutions, and administrative policies."
+            },
+            {
+                id: 38,
+                type: 'enum',
+                question: "What mathematical function or string verification tool is used to ensure data INTEGRITY by checking for modifications?",
+                keywords: ["hash", "hash function", "checksum"],
+                correctAnswer: "Hash Function / Checksum",
+                explanation: "Hash functions and checksums generate unique values representing data state; any modification alters the hash value, signaling integrity loss."
+            },
+            {
+                id: 39,
+                type: 'enum',
+                question: "Name the 2017 IoT botnet that hijacked over 122,000 IP cameras to execute massive DDoS attacks.",
+                keywords: ["persirai", "persirai botnet"],
+                correctAnswer: "Persirai Botnet",
+                explanation: "The Persirai botnet targeted over 1,000 IP camera models, running in memory to bypass detection while launching DDoS floods."
+            },
+            {
+                id: 40,
+                type: 'enum',
+                question: "Name the consumer credit reporting agency that suffered a major web application breach in September 2017.",
+                keywords: ["equifax", "equifax inc"],
+                correctAnswer: "Equifax Inc.",
+                explanation: "Equifax suffered a web application vulnerability breach exposing sensitive personal records of millions of US consumers."
+            },
+            {
+                id: 41,
+                type: 'enum',
+                question: "What term describes the vast network of physical objects (sensors, smart lights, cameras) connected to the internet that collect and share data?",
+                keywords: ["internet of things", "iot"],
+                correctAnswer: "Internet of Things (IoT)",
+                explanation: "The Internet of Things (IoT) encompasses interconnected physical devices equipped with sensors and networking capabilities."
+            },
+            {
+                id: 42,
+                type: 'enum',
+                question: "In a standard Risk Register, what term identifies 'What are we protecting?' (e.g., customer data, critical systems)",
+                keywords: ["asset", "assets"],
+                correctAnswer: "Asset",
+                explanation: "Assets represent anything of value to an organization that requires security protection."
+            },
+            {
+                id: 43,
+                type: 'enum',
+                question: "In a standard Risk Register, what term identifies 'What could happen?' (e.g., cyber attack, human error)",
+                keywords: ["threat", "threats"],
+                correctAnswer: "Threat",
+                explanation: "A threat represents any potential event or circumstance that could cause harm or compromise an asset."
+            },
+            {
+                id: 44,
+                type: 'enum',
+                question: "In a standard Risk Register, what term answers 'Where are we exposed?' (e.g., process gaps, weak passwords)",
+                keywords: ["vulnerability", "vulnerabilities"],
+                correctAnswer: "Vulnerability",
+                explanation: "A vulnerability is a flaw or weakness in security procedures, design, or implementation that could be exploited by a threat."
+            },
+            {
+                id: 45,
+                type: 'enum',
+                question: "What type of authentication uses unique biological characteristics such as fingerprints or facial scans?",
+                keywords: ["biometric", "biometrics", "biometric authentication"],
+                correctAnswer: "Biometric Authentication",
+                explanation: "Biometric authentication verifies identity using unique biological traits."
+            },
+            {
+                id: 46,
+                type: 'enum',
+                question: "What form of authentication sends a temporary numeric verification code to a user's mobile device?",
+                keywords: ["otp", "one time password", "one-time password", "otp authentication"],
+                correctAnswer: "OTP (One-Time Password) Authentication",
+                explanation: "OTP authentication delivers a temporary, single-use code to a registered secondary device."
+            },
+            {
+                id: 47,
+                type: 'enum',
+                question: "Which financial statement displays Revenue, Expenses, Taxes, and Net Earnings?",
+                keywords: ["income statement"],
+                correctAnswer: "Income Statement",
+                explanation: "The Income Statement details financial performance, tracking gross profits and net earnings over reporting periods."
+            },
+            {
+                id: 48,
+                type: 'enum',
+                question: "What legal protection grant covers scientific or technical inventions, preventing competitors from copying them?",
+                keywords: ["patent", "patents"],
+                correctAnswer: "Patent / Patents",
+                explanation: "Patents protect scientific and technical inventions, granting exclusive commercial production rights."
+            },
+            {
+                id: 49,
+                type: 'enum',
+                question: "What cyber attack occurs when thousands of malware-infected devices flood a targeted system's resources simultaneously? (Acronym or full name)",
+                keywords: ["ddos", "distributed denial of service", "distributed denial-of-service"],
+                correctAnswer: "DDoS (Distributed Denial-of-Service)",
+                explanation: "A DDoS attack leverages multiple infected endpoints (botnets) to overwhelm target server bandwidth and resources."
+            },
+            {
+                id: 50,
+                type: 'enum',
+                question: "In the McCumber Cube, what term refers to administrative controls like Incident Response Plans and best practice guidelines?",
+                keywords: ["policy and procedure", "policy", "procedure", "policies and procedures"],
+                correctAnswer: "Policy and Procedure",
+                explanation: "Policies and procedures serve as administrative frameworks establishing security rules and incident response protocols."
+            }
+        ];
+
+        let currentIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let score = 0;
+
+        const quizContainer = document.getElementById('quiz-container');
+        const summaryContainer = document.getElementById('summary-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const sectionLabel = document.getElementById('section-label');
+        const currentScoreElem = document.getElementById('current-score');
+
+        function renderQuestion() {
+            const item = quizData[currentIndex];
+            const isAnswered = userAnswers[currentIndex] !== null;
+            
+            // Progress Update
+            const progressPercent = ((currentIndex + 1) / quizData.length) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            progressText.innerText = `Item ${currentIndex + 1} of ${quizData.length}`;
+            
+            if (currentIndex < 25) {
+                sectionLabel.innerText = 'Section 1: Multiple Choice';
+            } else if (currentIndex < 35) {
+                sectionLabel.innerText = 'Section 2: True or False';
+            } else {
+                sectionLabel.innerText = 'Section 3: Enumeration & Identification';
+            }
+
+            let html = `
+                <div class="mb-4 flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full">
+                        ${item.type === 'mc' ? (currentIndex < 25 ? 'Multiple Choice' : 'True or False') : 'Enumeration / Short Answer'}
+                    </span>
+                    <span class="text-sm text-slate-500 font-medium">Item #${item.id}</span>
+                </div>
+
+                <h3 class="text-lg sm:text-xl font-bold text-slate-800 mb-6 leading-snug">${item.question}</h3>
+            `;
+
+            if (item.type === 'mc') {
+                html += `<div class="space-y-3 mb-6">`;
+                item.options.forEach((opt, idx) => {
+                    let btnClass = "w-full text-left p-4 rounded-xl border border-slate-200 transition-all font-medium flex justify-between items-center ";
+                    
+                    if (!isAnswered) {
+                        btnClass += "bg-slate-50 hover:bg-indigo-50 hover:border-indigo-300 text-slate-700 cursor-pointer";
+                    } else {
+                        const selected = userAnswers[currentIndex].selected;
+                        if (idx === item.correct) {
+                            btnClass += "bg-emerald-50 border-emerald-500 text-emerald-900 font-semibold shadow-sm";
+                        } else if (idx === selected && selected !== item.correct) {
+                            btnClass += "bg-rose-50 border-rose-400 text-rose-900";
+                        } else {
+                            btnClass += "bg-slate-50 border-slate-200 text-slate-400 opacity-60 cursor-not-allowed";
+                        }
+                    }
+
+                    html += `
+                        <button ${isAnswered ? 'disabled' : ''} onclick="handleMCSelect(${idx})" class="${btnClass}">
+                            <span><strong class="me-2 text-slate-400">${String.fromCharCode(65 + idx)}.</strong> ${opt}</span>
+                            ${isAnswered && idx === item.correct ? '<i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i>' : ''}
+                            ${isAnswered && idx === userAnswers[currentIndex].selected && idx !== item.correct ? '<i class="fa-solid fa-circle-xmark text-rose-500 text-lg"></i>' : ''}
+                        </button>
+                    `;
+                });
+                html += `</div>`;
+
+                // Explanations Box
+                if (isAnswered) {
+                    const sel = userAnswers[currentIndex].selected;
+                    const isCorrect = sel === item.correct;
+                    
+                    html += `
+                        <div class="mt-6 p-5 rounded-xl border ${isCorrect ? 'bg-emerald-50/80 border-emerald-200' : 'bg-rose-50/80 border-rose-200'}">
+                            <div class="flex items-center gap-2 mb-3 text-sm font-bold ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}">
+                                <i class="fa-solid ${isCorrect ? 'fa-check-circle' : 'fa-circle-xmark'}"></i>
+                                <span>${isCorrect ? 'Correct Answer!' : 'Incorrect Choice'}</span>
+                            </div>
+                            
+                            <div class="text-sm text-slate-700 leading-relaxed">
+                                <strong class="block text-slate-900 mb-2 border-b border-slate-200/60 pb-1">Detailed Option Explanations:</strong>
+                                <ul class="space-y-2 text-xs sm:text-sm">
+                                    ${item.options.map((o, i) => `
+                                        <li class="p-2 rounded ${i === item.correct ? 'bg-emerald-100/60 font-semibold text-emerald-900' : 'text-slate-600'}">
+                                            <strong class="text-slate-800">Option ${String.fromCharCode(65 + i)}:</strong>${item.rationales[i]}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                }
+
+            } else if (item.type === 'enum') {
+                if (!isAnswered) {
+                    html += `
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-2">Type your answer and press Enter (or click Submit):</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="enum-input" onkeydown="if(event.key==='Enter') handleEnumSubmit()" placeholder="Type key concept term..." class="flex-grow p-3.5 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-800">
+                                <button onclick="handleEnumSubmit()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3.5 rounded-xl transition">Submit</button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    const userVal = userAnswers[currentIndex].value;
+                    const isCorrect = userAnswers[currentIndex].isCorrect;
+
+                    html += `
+                        <div class="mb-6">
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-2">Your Submitted Answer:</label>
+                            <input type="text" disabled value="${userVal}" class="w-full p-3.5 border rounded-xl font-semibold ${isCorrect ? 'bg-emerald-50 border-emerald-400 text-emerald-900' : 'bg-rose-50 border-rose-400 text-rose-900'}">
+                        </div>
+
+                        <div class="mt-6 p-5 rounded-xl border ${isCorrect ? 'bg-emerald-50/80 border-emerald-200' : 'bg-rose-50/80 border-rose-200'}">
+                            <div class="flex items-center gap-2 mb-2 text-sm font-bold ${isCorrect ? 'text-emerald-800' : 'text-rose-800'}">
+                                <i class="fa-solid ${isCorrect ? 'fa-check-circle' : 'fa-circle-xmark'}"></i>
+                                <span>${isCorrect ? 'Correct Answer!' : 'Incorrect / Concept Missed'}</span>
+                            </div>
+                            
+                            <div class="text-sm text-slate-700 leading-relaxed space-y-2">
+                                <p><strong>Expected Answer Key:</strong> <span class="text-indigo-900 font-semibold">${item.correctAnswer}</span></p>
+                                <p class="text-xs sm:text-sm text-slate-600"><strong>Concept Rationale:</strong> ${item.explanation}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+
+            // Controls
+            html += `
+                <div class="mt-8 pt-4 border-t border-slate-100 flex justify-between items-center">
+                    <button onclick="prevQuestion()" ${currentIndex === 0 ? 'disabled' : ''} class="px-4 py-2 border border-slate-300 rounded-xl text-slate-600 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-sm">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Previous
+                    </button>
+                    <button onclick="nextQuestion()" ${!isAnswered ? 'disabled' : ''} class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-sm shadow-sm transition">
+                        ${currentIndex === quizData.length - 1 ? 'Finish Exam' : 'Next Item <i class="fa-solid fa-arrow-right ms-1"></i>'}
+                    </button>
+                </div>
+            `;
+
+            quizContainer.innerHTML = html;
+
+            if (item.type === 'enum' && !isAnswered) {
+                setTimeout(() => {
+                    const inp = document.getElementById('enum-input');
+                    if (inp) inp.focus();
+                }, 100);
+            }
+        }
+
+        function handleMCSelect(index) {
+            if (userAnswers[currentIndex] !== null) return;
+
+            const item = quizData[currentIndex];
+            const isCorrect = index === item.correct;
+
+            userAnswers[currentIndex] = {
+                selected: index,
+                isCorrect: isCorrect
+            };
+
+            if (isCorrect) score++;
+            updateScoreUI();
+            renderQuestion();
+        }
+
+        function handleEnumSubmit() {
+            if (userAnswers[currentIndex] !== null) return;
+
+            const inp = document.getElementById('enum-input');
+            if (!inp) return;
+
+            const val = inp.value.trim();
+            if (!val) return;
+
+            const item = quizData[currentIndex];
+            const cleanVal = val.toLowerCase();
+            const isCorrect = item.keywords.some(kw => cleanVal.includes(kw));
+
+            userAnswers[currentIndex] = {
+                value: val,
+                isCorrect: isCorrect
+            };
+
+            if (isCorrect) score++;
+            updateScoreUI();
+            renderQuestion();
+        }
+
+        function updateScoreUI() {
+            currentScoreElem.innerText = score;
+        }
+
+        function nextQuestion() {
+            if (currentIndex < quizData.length - 1) {
+                currentIndex++;
+                renderQuestion();
+            } else {
+                showSummary();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion();
+            }
+        }
+
+        function showSummary() {
+            quizContainer.classList.add('hidden');
+            summaryContainer.classList.remove('hidden');
+
+            document.getElementById('final-score').innerText = score;
+            const pct = Math.round((score / quizData.length) * 100);
+            document.getElementById('score-percentage').innerText = `${pct}% Accuracy`;
+        }
+
+        function restartQuiz() {
+            currentIndex = 0;
+            score = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            updateScoreUI();
+
+            summaryContainer.classList.add('hidden');
+            quizContainer.classList.remove('hidden');
+            renderQuestion();
+        }
+
+        // Initialize Quiz
+        renderQuestion();
+    </script>
+</body>
+</html>
